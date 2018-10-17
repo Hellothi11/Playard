@@ -9,7 +9,7 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function(done) {
+module.exports.bootstrap = async function (done) {
 
   // By convention, this is a good place to set up fake data during development.
   //
@@ -30,6 +30,43 @@ module.exports.bootstrap = async function(done) {
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   sails.config.appName = "Playard app";
+
+  // Generate Chat Messages
+  try {
+    let messageCount = ChatMessage.count();
+    if (messageCount > 0) {
+      return; // don't repeat messages
+    }
+
+    let users = await User.find();
+    if (users.length >= 3) {
+      console.log("Generating messages...")
+
+      let msg1 = await ChatMessage.create({
+        message: 'Hey Everyone! Welcome to the community!',
+        createdBy: users[1].id
+      }).fetch();
+      console.log("Created Chat Message: " + msg1.id);
+
+      let msg2 = await ChatMessage.create({
+        message: "How's it going?",
+        createdBy: users[2].id
+      });
+      console.log("Created Chat Message: " + msg2.id);
+
+      let msg3 = await ChatMessage.create({
+        message: 'Super excited!',
+        createdBy: users[0].id
+      });
+      console.log("Created Chat Message: " + msg3.id);
+
+    } else {
+      console.log('skipping message generation');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
   return done();
 
 };

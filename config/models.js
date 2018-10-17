@@ -119,6 +119,6 @@ module.exports.models = {
   ***************************************************************************/
 
   cascadeOnDestroy: true,
-  migrate: 'drop'
+  migrate: 'alter'
 
 };
