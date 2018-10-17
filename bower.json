@@ -1,0 +1,22 @@
+{
+  "name": "playard",
+  "description": "a Sails application",
+  "main": "app.js",
+  "authors": [
+    "nguyen.tam.thi"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic": "semantic-ui#^2.4.1",
+    "jsrender": "^0.9.91"
+  }
+}
